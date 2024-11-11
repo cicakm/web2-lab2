@@ -1,0 +1,30 @@
+html
+    body
+        script(type='text/javascript').
+            function submitForm(form) {
+                var checkboxValue = document.getElementById("checkbox").checked;
+                var inputboxValue = form.inputbox.value;
+                if (checkboxValue) {
+                    document.getElementById("parag").innerHTML = inputboxValue;
+                } else {
+                    document.getElementById("parag").innerHTML =
+                    encodeURIComponent(inputboxValue);
+                }
+            }
+        h3: a(href='/') Home
+        p Za primjer ranjivosti možete koristiti
+        i &lt;a href=&quot;javascript:alert(&apos;XSS Napad&apos;);&quot;&gt;Sumnjivi link&lt;/a&gt;
+        p ili
+        i  &lt;img src=&quot;x&quot; hidden onError=&apos;alert(&quot;XSS Napad!&quot;)&apos; /&gt;
+        br
+        form(action='' method='GET')
+            label(for='checkbox') Dopusti ranjivost 
+            input#checkbox(type='checkbox' name='checkbox')
+            br
+            
+            label(for='inputbox')  Upišite svoje ime: 
+            input(type='text' name='inputbox' value='')
+            input(type='button' value='Unos' onclick='submitForm(this.form)')
+        
+        span Vaše ime: 
+        span#parag

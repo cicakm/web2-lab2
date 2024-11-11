@@ -1,0 +1,21 @@
+html
+    body
+        h3: a(href='/') Home
+        form(action='' method='post')
+            label(for='checkbox') Dopusti ranjivost
+            input(type='checkbox' name='checkbox')
+            br
+            label(for='username')  Korisničko ime: 
+            input(type='text' name='username' value='')
+            br
+            label(for='password')  Lozinka: 
+            input(type='password' name='password' value='')
+            input(type='submit' value='Registracija')
+
+        if result
+            ul 
+                each val in result
+                    if val.secured 
+                        li= val.username + " - " + val.password
+                    else 
+                        li= "RANJIVO!! " + val.username + " - " + val.password
